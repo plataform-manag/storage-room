@@ -269,7 +269,7 @@ select {
         <div id="detalleTableContainer">
           <table id="detalleTable">
             <thead>
-              <tr><th>DESCRIPCIÓN</th><th>EQUIPO</th><th>MARCA</th><th>MODELO</th><th>NÚMERO DE SERIE</th><th>Nº CONTROL PATRIMONIAL</th><th>CANTIDAD</th><th>UNIDAD</th></tr>
+              <tr><th>DESCRIPCIÓN</th><th>EQUIPO</th><th>MARCA</th><th>MODELO</th><th>NÚMERO DE SERIE</th><th>Nº CONTROL PATRIMONIAL</th><th>O.C</th><th>CANTIDAD</th><th>UNIDAD</th></tr>
             </thead>
             <tbody></tbody>
           </table>
@@ -424,7 +424,7 @@ function mostrarResumen(resumen, detalles) {
       tbody.innerHTML = '';
       detalles.forEach(fila => {
         const tr = document.createElement('tr');
-        tr.innerHTML = fila.slice(0, 8).map(c => `<td>${c}</td>`).join('');
+        tr.innerHTML = fila.slice(0, 9).map(c => `<td>${c}</td>`).join('');
         tbody.appendChild(tr);
       });
       document.getElementById('detalleSection').classList.remove('hidden');
@@ -444,9 +444,9 @@ if (!accesorio) {
         body: JSON.stringify({ action: 'getAccesorios' })
       }).then(res => res.json()).then(data => {
         const encontrados = data.filter(f => f[1] === accesorio);
-        let html = `<thead><tr><th>DESCRIPCIÓN</th><th>ACCESORIO</th><th>MARCA</th><th>MODELO</th><th>CANTIDAD</th><th>UNIDAD</th></tr></thead><tbody>`;
+        let html = `<thead><tr><th>DESCRIPCIÓN</th><th>ACCESORIO</th><th>MARCA</th><th>MODELO</th><th>O.C</th><th>CANTIDAD</th><th>UNIDAD</th></tr></thead><tbody>`;
         encontrados.forEach(fila => {
-          html += `<tr>${fila.slice(0, 6).map(d => `<td>${d}</td>`).join('')}</tr>`;
+          html += `<tr>${fila.slice(0, 7).map(d => `<td>${d}</td>`).join('')}</tr>`;
         });
         html += '</tbody>';
         document.getElementById('tablaAccesorio').innerHTML = html;
@@ -579,3 +579,4 @@ async function exportarDetallePDF() {
 
 </body>
 </html>
+
